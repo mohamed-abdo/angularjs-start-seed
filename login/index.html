@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html ng-app="auth" lang="en" class="no-js">
+<head>
+    <base href="/login/" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>angularStartKit</title>
+    <meta name="description" content="angularStartKit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--styles-->
+    <link href="../content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../content/font-awesome.min.css" rel="stylesheet" />
+    <link href="../content/theme_styles.css" rel="stylesheet" />
+    <link href="../content/app.css" rel="stylesheet" />
+    <link href="../content/site.css" rel="stylesheet" />
+    <link href="../content/toaster.min.css" rel="stylesheet" />
+    <!-- Favicon -->
+    <link type="image/x-icon" href="../favicon.png" rel="shortcut icon" />
+    <!-- Favicon -->
+    <!--scripts-->
+    <script src="../scripts/modernizr-2.8.3.js"></script>
+</head>
+<body id="login-page-full" class="theme-whbl" ng-controller="layoutCtrl">
+    <header></header>
+    <main>
+        <div id="login-full-wrapper" ng-cloak ng-style="{'background-image':'url(' + style.appBackGround + ')', backgroundRepeat: 'no-repeat', 'background-position': 'center' }">
+            <div class="container">
+                <div class="row">
+                    <toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'login-toaster' }"></toaster-container>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="login-box">
+                            <div id="login-box-holder">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <header id="login-header">
+                                            <img ng-src="{{style.appLogo}}" class="col-xs-3 " alt="" />
+                                            <div class="col-xs-8">
+                                                <span ng-cloak class="title ng-binding">{{style.appTitle}}</span>
+                                                <br>
+                                                <span ng-cloak class="sutext ng-binding">{{style.appSubtext}}</span>
+                                            </div>
+                                        </header>
+                                        <div id="login-box-inner" ng-controller="loginCtrl" cg-busy="appPromise">
+                                            <form name="loginForm" method="post" ng-submit="submit(authClient);">
+                                                <div ng-show="!isAuthenticated">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                                                        <input required name="username" autofocus id="username" type="text" class="form-control"
+                                                               placeholder="Username" ng-model="username" maxlength="100">
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-key"></i>
+                                                        </span>
+                                                        <input required id="password" name="password" type="password" class="form-control"
+                                                               placeholder="Password" ng-model="password" maxlength="100" autocomplete="off">
+                                                    </div>
+
+                                                    <div id="remember-me-wrapper">
+                                                        <div class="row">
+                                                            <!--<div class="col-xs-6">
+                                            <div class="checkbox-nice">
+                                                <input type="checkbox" id="remember-me" ng-model="model.rememberMe" />
+                                                <label for="remember-me">
+                                                    Remember me
+                                                </label>
+                                            </div>
+                                        </div>-->
+                                                            <div class="col-xs-12">
+                                                                <a class="pull-right color-darkblue hand"
+                                                                   data-toggle="modal" data-target="#forgotPasswordModal" ng-click="openForgotPasswordModal();">Forgot Password?</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-xs-12">
+                                                            <button type="submit" id="loginBtn"
+                                                                    class="btn btn-primary btn-login col-xs-12">
+                                                                Login
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <button type="button"
+                                                                    data-toggle="modal" data-target="#contactUsModal.html" ng-click="openContactUsModal();"
+                                                                    class="btn btn-primary col-xs-12 btn-facebook">
+                                                                <i class="fa fa-envelope"></i> Contact Support
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6">
+                                                            <button type="button"
+                                                                    data-toggle="modal" data-target="#FAQModal.html" ng-click="openFAQModal();"
+                                                                    class="btn btn-primary col-xs-12 btn-facebook">
+                                                                FAQ<i class="fa fa-question"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="row pull-right">
+                                            <div class="form-group" ng-show="isAuthenticated">
+                                                <div class="col-sm-4 controls pull-left">
+                                                    <button id="btn-logout" name="logout" role="button" data-ng-click="logout();" class="btn btn-primary">Log out </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="global-footer hidden-xs hidden-xxs">
+        <!--<address class="global-footer-address  pull-right ">-->
+        <p class="center font-1-2">
+            <span ng-cloak>{{style.appTitle}} &nbsp;-&nbsp; <span id="assemblyVerSpan">{{style.version}}</span>&nbsp;|&nbsp;</span>
+            <a class="color-white" href="http://www.angularStartKit.com" ng-cloak target="_blank">angularStartKit All Rights Reserved. © <span id="copyrights"></span></a>&nbsp;|&nbsp;
+            <a class="color-white" href="http://www.angularStartKit.com/terms-and-conditions/" ng-cloak target="_blank">Disclaimer.</a>
+        </p>
+        <!--</address>-->
+    </footer>
+
+    <div id="scripts">
+        <!--framework script-->
+        <script src="../scripts/angular.min.js"></script>
+        <script src="../scripts/jquery-3.1.1.min.js"></script>
+        <script src="../scripts/bootstrap.min.js"></script>
+        <script src="../scripts/angular-ui-router.min.js"></script>
+        <script src="../scripts/angular-ui/ui-bootstrap.min.js"></script>
+        <script src="../scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+        <script src="../scripts/angular-animate.min.js"></script>
+        <script src="../scripts/angular-sanitize.min.js"></script>
+        <script src="../scripts/angular-busy.min.js"></script>
+        <script src="../scripts/angular-sanitize.min.js"></script>
+        <script src="../scripts/ngStorage.min.js"></script>
+
+        <!--libraries-->
+        <script src="../scripts/lodash.min.js"></script>
+        <script src="../scripts/toaster.min.js"></script>
+        <script src="../scripts/spin.min.js"></script>
+        <!--application script-->
+        <script src="app.js"></script>
+        <script src="config.js"></script>
+        <!--services script-->
+        <script src="utils.js"></script>
+        <script src="services/tokenService.js"></script>
+        <script src="services/authService.js"></script>
+        <script src="services/clientService.js"></script>
+        <script src="services/clientThemeService.js"></script>
+        <script src="services/userService.js"></script>
+        <!--controllers script-->
+        <script src="controllers/layoutCtrl.js"></script>
+        <script src="controllers/loginCtrl.js"></script>
+
+        <!--contact us-->
+        <script src="shared/contactSupport/services/contactUsService.js"></script>
+        <script src="shared/contactSupport/controllers/contactUsModalInstanceCtrl.js"></script>
+        <script src="shared/contactSupport/controllers/contactUsCtrl.js"></script>
+        <div ng-include="'shared/contactSupport/views/contactUsModal.html'"></div>
+        <!--contact us-->
+        <!--FAQ-->
+        <script src="shared/FAQ/controllers/FAQModalInstanceCtrl.js"></script>
+        <script src="shared/FAQ/controllers/FAQCtrl.js"></script>
+        <div ng-include="'shared/FAQ/views/FAQModal.html'"></div>
+        <!--FAQ-->
+        <!--forgot password-->
+        <script src="shared/forgotPassword/controllers/forgotPasswordModalInstanceCtrl.js"></script>
+        <script src="shared/forgotPassword/controllers/forgotPasswordCtrl.js"></script>
+        <div ng-include="'shared/forgotPassword/views/forgotPasswordModal.html'"></div>
+        <!--forgot password-->
+    </div>
+    <script type="text/javascript">
+        var getCopyRightText = function () {
+            var curretnYear = new Date().getFullYear();
+            var nextYear = curretnYear + 1;
+            return curretnYear + " - " + nextYear;
+        }
+        $(function () {
+            $("#copyrights").text(getCopyRightText());
+        });
+    </script>
+
+</body>
+</html>

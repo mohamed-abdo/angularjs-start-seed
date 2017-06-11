@@ -1,0 +1,12 @@
+﻿{
+    "clients": [
+        {
+            "clientId": "default",
+            "clientKey": "G@cP@s$w0rd",
+            "version": "1.0.0.0",
+            "subTitle": "Delivering your strategy."
+
+        }
+
+    ]
+}

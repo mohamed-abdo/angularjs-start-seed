@@ -1,0 +1,33 @@
+﻿<div ng-controller="contactUsCtrl">
+    <script type="text/ng-template" id="contactUsModal.html">
+
+        <div class="modal-content">
+            <form autocomplete="on" name="contactsupportFrm" method="post">
+                <div class="modal-header">
+                    <h3 class="modal-title">Contact Support</h3>
+                </div>
+                <div class="modal-body">
+                    <b>Message</b>
+                    <div class="form-group">
+                        <textarea name="body" ng-model="messageBody" required placeholder="Please type you message here..."
+                                  style="max-height: 150px; min-height: 150px; overflow: auto; width: 100%; max-width: 100%;"></textarea>
+                    </div>
+                    <b>Your Email </b>
+                    <div class="form-group">
+                        <input type='email' name="sender" ng-model="messageSender" placeholder='Enter your email' required style='width:100%;'>
+                    </div>
+                    <b>Cc E-mail</b> (optional)<br />
+                    <div class="form-group">
+                        <input type='email' id='contactsupportadditionemailaddresses' name="cc" ng-model="messageCC"
+                               placeholder='Enter cc email' style='width:100%;'>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" ng-click="contactSupport_click()">Send Email</button>
+                    <button class="btn btn-warning" type="button" data-dismiss="modal" ng-click="$dismiss('cancel');">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </script>
+</div>
